@@ -1,5 +1,5 @@
 import React from "react";
-import { WheelProvider } from "../../context/Context";
+import { WheelProvider } from "../../context/Context.js";
 
 function Wheel() {
   return (

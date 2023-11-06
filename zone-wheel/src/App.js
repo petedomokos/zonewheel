@@ -1,5 +1,5 @@
 import "./App.css";
-import Wheel from "./components/wheel/Wheel";
+import Wheel from "./components/wheel/Wheel.js";
 
 function App() {
   return (
