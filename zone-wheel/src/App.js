@@ -1,5 +1,6 @@
 import "./App.css";
-import Wheel from "./components/wheel/Wheel.js";
+
+import Wheel from "./components/wheel/Wheel";
 
 function App() {
   return (
