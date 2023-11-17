@@ -3,12 +3,14 @@ import React, { createContext, useState } from "react";
 export const WheelContext = createContext();
 
 export const WheelProvider = ({ children }) => {
+  const [user, setUser] = useState();
+  const [layers, setLayers] = useState();
   const mockData = {
     wheelData: [
       {
         userId: "user one",
         userName: "John",
-        wheelId: "0", //indexing to avoid N+1 query problem in mongoDB
+        wheelId: '0', //indexing to avoid N+1 query problem in mongoDB
         title: "self-development",
         levels: [
           // as 'layers'; key:string, title: string
@@ -172,6 +174,11 @@ export const WheelProvider = ({ children }) => {
     <WheelContext.Provider
       value={{
         mockData,
+
+        user,
+        setUser,
+        layers,
+        setLayers,
       }}>
       {children}
     </WheelContext.Provider>
