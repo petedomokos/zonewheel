@@ -1,12 +1,11 @@
 import React from "react";
 import { WheelProvider } from "../../context/Context.js";
-
-import WheelDataFetch from "../../services/wheelDataFetch.js";
+import HydrateWheelData from "../../services/HydrateWheelData.js";
 
 function Wheel() {
   return (
     <WheelProvider>
-      <WheelDataFetch />
+      <HydrateWheelData />
     </WheelProvider>
   );
 }
