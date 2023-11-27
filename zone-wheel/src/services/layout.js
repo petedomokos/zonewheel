@@ -29,7 +29,7 @@ const layout = (wheelState) => {
             title,
             status,
             desc,
-            primaryKey: `${aspectKey} ${levelKey}`,
+            primaryKey: `${aspectKey}-${levelKey}`,
           };
         });
 
