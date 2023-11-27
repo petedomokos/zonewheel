@@ -1,11 +1,14 @@
 import "./App.css";
 
 import Wheel from "./components/wheel/Wheel.js";
+import { WheelProvider } from "./context/Context";
 
 function App() {
   return (
     <div className="App">
-      <Wheel />
+      <WheelProvider>
+        <Wheel />
+      </WheelProvider>
     </div>
   );
 }
