@@ -1,7 +1,7 @@
-import mockState from "./mockState";
+import wheelState from "./mockState";
 
 function fetchWheelState() {
-  return mockState;
+  return wheelState;
 }
 
 export default fetchWheelState;

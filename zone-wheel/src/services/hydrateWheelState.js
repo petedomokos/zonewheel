@@ -1,33 +1,24 @@
+import { DEFAULT_STATUS } from "../constants/constants.js";
+
 const hydrateWheelData = (wheelState) => {
-  const currentWheelState = wheelState?.wheelState;
-
-  // Check for existence of properties using optional chaining
-  if (currentWheelState?.[0]?.datapoints) {
-    const datapoints = currentWheelState[0].datapoints;
-
-    if (Array.isArray(datapoints)) {
-      const updatedDatapoints = datapoints.map((d) => ({ ...d, status: Number.parseInt(d.status) }));
-
-      // object shorthand for better readability
-      const hydratedState = {
-        ...wheelState,
-        wheelState: [
-          {
-            ...currentWheelState[0],
-            datapoints: updatedDatapoints,
-          },
-        ],
-      };
-
-      return hydratedState;
-    } else {
-      console.warn("datapoints is not an array");
-    }
-  } else {
-    console.warn("Invalid wheelState structure");
+  // Check for existence of properties
+  if (!wheelState?.datapoints) {
+    console.warn("datapoints is not an array");
+    return Error({ wheelState });
   }
 
-  return wheelState; // Return the original wheelState if there are issues
+  const { datapoints } = wheelState;
+
+  const hydratedDatapoints = datapoints.map((d) => ({
+    ...d,
+    status: +d.status || DEFAULT_STATUS,
+  }));
+
+  const hydratedState = {
+    ...wheelState,
+    datapoints: hydratedDatapoints,
+  };
+  return hydratedState
 };
 
 export default hydrateWheelData;
