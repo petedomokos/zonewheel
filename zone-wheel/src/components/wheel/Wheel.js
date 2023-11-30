@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { WheelContext } from "../../context/Context.js";
-import layout from "../../services/layout.js";
+import wheelLayout from "./layout/wheelLayout.js";
 
 function Wheel() {
   const { wheelState } = useContext(WheelContext);
