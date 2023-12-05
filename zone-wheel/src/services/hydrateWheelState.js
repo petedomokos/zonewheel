@@ -1,4 +1,5 @@
 import { DEFAULT_STATUS } from "../constants/constants.js";
+import { isNr } from "../util/dataHelpers.js";
 
 const hydrateWheelData = (wheelState) => {
   // Check for existence of properties
@@ -8,17 +9,19 @@ const hydrateWheelData = (wheelState) => {
   }
 
   const { datapoints } = wheelState;
-
-  const hydratedDatapoints = datapoints.map((d) => ({
-    ...d,
-    status: +d.status || DEFAULT_STATUS,
-  }));
+  const hydratedDatapoints = datapoints.map((d) => {
+    const hydratedStatus = isNr(Number(d.status)) ? +d.status : DEFAULT_STATUS;
+    return {
+      ...d,
+      status: hydratedStatus,
+    };
+  });
 
   const hydratedState = {
     ...wheelState,
     datapoints: hydratedDatapoints,
   };
-  return hydratedState
+  return hydratedState;
 };
 
 export default hydrateWheelData;
