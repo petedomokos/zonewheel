@@ -1,4 +1,4 @@
-import { DEFAULT_STATUS } from "../constants/constants.js";
+import { DEFAULT_SEGMENT_STATUS } from "../constants/constants.js";
 import { isNr } from "../util/dataHelpers.js";
 
 const hydrateWheelData = (wheelState) => {
@@ -10,7 +10,7 @@ const hydrateWheelData = (wheelState) => {
 
   const { datapoints } = wheelState;
   const hydratedDatapoints = datapoints.map((d) => {
-    const hydratedStatus = isNr(Number(d.status)) ? +d.status : DEFAULT_STATUS;
+    const hydratedStatus = isNr(Number(d.status)) ? +d.status : DEFAULT_SEGMENT_STATUS;
     return {
       ...d,
       status: hydratedStatus,
