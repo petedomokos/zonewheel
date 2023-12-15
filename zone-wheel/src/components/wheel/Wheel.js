@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { WheelContext } from "../../context/Context.js";
-import wheelLayout from "./wheelLayout.js";
+
 function Wheel() {
   const { wheelState } = useContext(WheelContext);
 
