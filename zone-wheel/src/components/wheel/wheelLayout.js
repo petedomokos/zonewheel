@@ -45,7 +45,7 @@ const wheelLayout = (wheelState = {}) => {
           };
         });
 
-      return { key, title, segmentData };
+      return { key: `layer-${key}`, title, segmentData };
     }),
   };
 };
