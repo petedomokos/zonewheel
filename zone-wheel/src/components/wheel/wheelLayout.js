@@ -1,6 +1,6 @@
-import { toRads, calcArcPos } from "../../util/geometryHelpers.js";
+import { calcArcPos } from "../../util/geometryHelpers.js";
 
-const createArcPath = (innerIndex, nrOfAspects, x, y, innerRadius) => {
+const createArcPathD = (innerIndex, nrOfAspects, x, y, innerRadius) => {
   const aspectAngle = 360 / nrOfAspects;
 
   const startAngle = innerIndex * aspectAngle;
@@ -15,10 +15,7 @@ const createArcPath = (innerIndex, nrOfAspects, x, y, innerRadius) => {
 
   const d = `M ${startPos.x} ${startPos.y} A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 1 ${endPos.x} ${endPos.y}`;
 
-  // calc the circumference of a fraction of a circle (C = 2 * π * r)
-  const arcLength = toRads(angleDiff) * innerRadius;
-
-  return { d, arcLength };
+  return d ;
 };
 
 const wheelLayout = (wheelState = {}) => {
@@ -41,7 +38,7 @@ const wheelLayout = (wheelState = {}) => {
             status,
             desc,
             primaryKey: `${aspectKey}-${levelKey}`,
-            createArcPath,
+            createArcPathD,
           };
         });
 
