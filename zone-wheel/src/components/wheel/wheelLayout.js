@@ -1,21 +1,18 @@
-import { calcArcPos } from "../../util/geometryHelpers.js";
+import { calcArcCoord, calcWheelSectorAngles } from "../../util/geometryHelpers.js";
 
-const createArcPathD = (innerIndex, nrOfAspects, x, y, innerRadius) => {
-  const aspectAngle = 360 / nrOfAspects;
+const createSectorPathD = (index, nrOfAspects, x, y) => {
+  const { startAngle, endAngle, aspectAngleSize } = calcWheelSectorAngles(nrOfAspects, index);
+  const startPoint = calcArcCoord(x, y, radiusOfLevel, startAngle);
+  const endPoint = calcArcCoord(x, y, radiusOfLevel, endAngle);
 
-  const startAngle = innerIndex * aspectAngle;
-  const endAngle = (innerIndex + 1) * aspectAngle;
-  const startPos = calcArcPos(x, y, innerRadius, startAngle);
-  const endPos = calcArcPos(x, y, innerRadius, endAngle);
+  const angleIsGreaterThan180 = aspectAngleSize <= 180 ? false : true; //Determine the direction of the arc (clockwise or counterclockwise)
 
-  const angleDiff = endAngle - startAngle;
+  const arc = `${radiusOfLevel} ${radiusOfLevel} 0 ${angleIsGreaterThan180 ? 1 : 0} 1 ${endPoint.x} ${endPoint.y}`;
+  const centerPoint = `${x} ${y}`;
 
-  // Determine the direction of the arc (clockwise or counterclockwise)
-  const largeArcFlag = angleDiff <= 180 ? "0" : "1";
+  const d = `M ${startPoint.x} ${startPoint.y} A ${arc} L ${centerPoint} L ${startPoint.x} ${startPoint.y}`;
 
-  const d = `M ${startPos.x} ${startPos.y} A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 1 ${endPos.x} ${endPos.y}`;
-
-  return d ;
+  return d;
 };
 
 const wheelLayout = (wheelState = {}) => {
@@ -38,7 +35,7 @@ const wheelLayout = (wheelState = {}) => {
             status,
             desc,
             primaryKey: `${aspectKey}-${levelKey}`,
-            createArcPathD,
+            createSectorPathD,
           };
         });
 
