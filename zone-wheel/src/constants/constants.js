@@ -1,0 +1,1 @@
+const DEFAULT_SEGMENT_STATUS = 0
